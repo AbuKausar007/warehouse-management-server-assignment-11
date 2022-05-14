@@ -24,6 +24,7 @@ async function run() {
     await client.connect();
     const inventoryCollection = client.db("wareHouse").collection("inventory");
 
+    // load data
     app.get("/inventories", async (req, res) => {
       const query = {};
       const cursor = inventoryCollection.find(query);
@@ -31,6 +32,7 @@ async function run() {
       res.send(inventories);
     });
 
+    // load single data
     app.get("/inventories/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
@@ -38,6 +40,7 @@ async function run() {
       res.send(inventory);
     });
 
+    // increase quantity
     app.put("/inventories/:id", async (req, res) => {
       const id = req.params.id;
       const updateQuantity = req.body;
@@ -55,6 +58,26 @@ async function run() {
       );
       res.send(result);
     });
+
+    // delivery quantity
+    /* app.put("/inventories/:id", async (req, res) => {
+      const id = req.params.id;
+      const updateQuantity = req.body;
+      const filter = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          quantity: updateQuantity,
+        },
+      };
+      const result = await inventoryCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.send(result);
+    });
+    */
   } finally {
   }
 }

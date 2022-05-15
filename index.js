@@ -72,6 +72,7 @@ async function run() {
     });
 
     // delivery quantity
+    // stackOver: https://stackoverflow.com/questions/72250814/how-to-reduce-quantity-from-mongodb-using-node-js
     /* app.put("/inventories/:id", async (req, res) => {
       const id = req.params.id;
       const updateQuantity = req.body;

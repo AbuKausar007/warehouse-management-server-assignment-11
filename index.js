@@ -9,9 +9,6 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-//user: warehouseUser
-//pass: O8fST7bvNocdY0bv
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@warehouse.0cmkr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -64,6 +61,13 @@ async function run() {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await inventoryCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // POST api
+    app.post("/inventories", async (req, res) => {
+      const newInventory = req.body;
+      const result = await inventoryCollection.insertOne(newInventory);
       res.send(result);
     });
 

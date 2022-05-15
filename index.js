@@ -59,6 +59,14 @@ async function run() {
       res.send(result);
     });
 
+    // DELETE api
+    app.delete("/inventories/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await inventoryCollection.deleteOne(query);
+      res.send(result);
+    });
+
     // delivery quantity
     /* app.put("/inventories/:id", async (req, res) => {
       const id = req.params.id;

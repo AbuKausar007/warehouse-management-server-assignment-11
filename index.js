@@ -31,7 +31,7 @@ async function run() {
       res.send({ accessToken });
     });
 
-    // load data
+    // load data api
     app.get("/inventories", async (req, res) => {
       const query = {};
       const cursor = inventoryCollection.find(query);
@@ -39,7 +39,7 @@ async function run() {
       res.send(inventories);
     });
 
-    // load single data
+    // load single data api
     app.get("/inventories/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };

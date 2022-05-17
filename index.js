@@ -110,6 +110,10 @@ app.get("/", (req, res) => {
   res.send("Running warehouse server!");
 });
 
+app.get("/fresh", (req, res) => {
+  res.send("Fresh grocery house");
+});
+
 app.listen(port, () => {
   console.log("Listening to port", port);
 });
